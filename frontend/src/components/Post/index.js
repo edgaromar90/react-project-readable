@@ -12,6 +12,44 @@ class Post extends Component {
     category: 'category',
     voteScore: 1,
     deleted: false,
+    activeThumbsUp: false,
+    activeThumbsDown: false
+  }
+
+  setActiveThumbsUp = () => {
+    this.setState(prevState => ({
+      activeThumbsUp: !prevState.activeThumbsUp,
+      activeThumbsDown: false
+    }));
+  }
+
+  setActiveThumbsDown = () => {
+    this.setState(prevState => ({
+      activeThumbsDown: !prevState.activeThumbsDown,
+      activeThumbsUp: false
+    }));
+  }
+
+  thumbsUp = () => {
+    return (
+      <div onClick={this.setActiveThumbsUp}>
+        { this.state.activeThumbsUp
+          ? (<FaThumbsUp color={'#018010'} size={'2em'} />)
+          : (<FaThumbsOUp color={'#018010'} size={'2em'} />)
+        }
+      </div>
+    );
+  }
+
+  thumbsDown = () => {
+    return (
+      <div onClick={this.setActiveThumbsDown}>
+        { this.state.activeThumbsDown
+          ? (<FaThumbsDown color={'#A80110'} size={'2em'} />)
+          : (<FaThumbsODown color={'#A80110'} size={'2em'} />)
+        }
+      </div>
+    );
   }
 
   render(){
@@ -20,12 +58,12 @@ class Post extends Component {
 
     return(
       <div className="post-wrapper row justify-content-center">
-        <div className="post-vote col-2 col-lg-1">
-          <FaThumbsOUp color={'#018010'} size={'2em'} />
+        <div className="d-none d-sm-block post-vote col-12 col-sm-2 col-lg-1">
+          { this.thumbsUp() }
           <p>{voteScore}</p>
-          <FaThumbsODown color={'#A80110'} size={'2em'} />
+          { this.thumbsDown() }
         </div>
-        <div className="post-content col-9">
+        <div className="post-content col-12 col-sm-9">
           <div className="post-title">
             <h3>{ title }</h3>
           </div>
@@ -40,8 +78,11 @@ class Post extends Component {
             { timestamp }
           </div>
         </div>
-
-
+        <div className="d-flex d-sm-none post-vote col-12 col-sm-2 col-lg-1">
+          { this.thumbsUp() }
+          <p style={ {margin:'0 15px'} }>{voteScore}</p>
+          { this.thumbsDown() }
+        </div>
       </div>
     );
   }

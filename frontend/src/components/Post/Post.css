@@ -1,5 +1,6 @@
 .post-wrapper {
   margin-bottom: 40px;
+  padding: 10px;
 }
 
 .post-vote {
@@ -11,6 +12,9 @@
   margin-top: 5px;
   margin-bottom: 5px;
   font-size: 1.4em;
+}
+
+.post-body {
 }
 
 .post-body p {
