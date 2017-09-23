@@ -1,0 +1,33 @@
+.post-wrapper {
+  margin-bottom: 40px;
+}
+
+.post-vote {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.post-vote p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 1.4em;
+}
+
+.post-body p {
+  text-align: 'justify';
+  text-justify: 'inter-word';
+}
+
+.post-body span {
+  background-color: #ADD8E6;
+  padding: 8px;
+}
+
+.post-signature {
+  text-align: right;
+}
+
+.post-signature p {
+  font-size: 1.1em;
+  margin-bottom: 0;
+}

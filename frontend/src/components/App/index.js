@@ -1,18 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import ListPosts from '../ListPosts';
+import ListCategories from '../ListCategories';
+import { FaNewspaperO } from 'react-icons/lib/fa';
 import './App.css';
 
 class App extends Component {
+  state={
+    filter: 'byVote',
+    categories: [
+      'Udacity',
+      'React',
+      'Redux'
+    ]
+  }
+
   render() {
+
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <div className="app container-fluid">
+        <div className="header-app row">
+          <FaNewspaperO color={'#fff'} size={'3em'} style={ {margin:'0 10px 0 10px'} }/>
+          <h1>Readable</h1>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div className="container">
+          <ListCategories categories={this.state.categories} />
+        </div>
+        <div className="container">
+          <ListPosts />
+        </div>
       </div>
     );
   }
