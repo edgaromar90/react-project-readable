@@ -1,17 +1,14 @@
 .list-categories {
   margin-top: 20px;
-  padding: 20px;
   color: #01579b;
-  box-shadow: 1px 1px 20px 1px;
+/*  box-shadow: 1px 1px 20px 1px;
   border: 1px solid;
-  border-radius: 5px;
+  border-radius: 5px;*/
 }
-
 .categories-group {
-  margin: 20px 0 20px 0;
+  margin: 20px 0;
   padding: 0;
 }
 
 .sort-menu {
-  margin-top: 20px;
 }

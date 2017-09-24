@@ -7,7 +7,7 @@ class ListPosts extends Component {
   render(){
 
     return(
-      <div className="post-list row">
+      <div className="post-list row justify-content-center">
         <Post />
         <hr className="col-10" />
         <Post />

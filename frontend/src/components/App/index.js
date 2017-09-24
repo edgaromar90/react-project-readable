@@ -19,8 +19,8 @@ class App extends Component {
     return (
       <div className="app container-fluid">
         <div className="header-app row">
-          <FaNewspaperO color={'#fff'} size={'3em'} style={ {margin:'0 10px 0 10px'} }/>
-          <h1>Readable</h1>
+          <FaNewspaperO color={'#fff'} size={'2em'} style={ {margin:'0 5px 0 10px'} }/>
+          <h3>Readable</h3>
         </div>
         <div className="container">
           <ListCategories categories={this.state.categories} />
