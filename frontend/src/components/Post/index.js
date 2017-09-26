@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { FaThumbsUp, FaThumbsOUp, FaThumbsODown, FaThumbsDown } from 'react-icons/lib/fa';
 import './Post.css';
 
 class Post extends Component {
 
   state = {
+    id: 123,
     timestamp: '09/21/2017',
     title: 'Post Title',
     body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat in turpis non rhoncus. Duis ut varius massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque vestibulum euismod lectus sed convallis. Aliquam at felis tincidunt, faucibus nunc sed, hendrerit massa. Cras sodales, quam ut auctor ultrices, mi lorem euismod purus, sit amet scelerisque diam nisi eget orci. Proin feugiat tempor aliquam. Duis suscipit efficitur risus et finibus. Praesent imperdiet leo ligula, vitae malesuada lectus ornare ut. Aliquam orci urna, consectetur eu leo sit amet, porta tincidunt odio.',
@@ -54,7 +56,7 @@ class Post extends Component {
 
   render(){
 
-    const { title, voteScore, body, author, timestamp, category } = this.state;
+    const { title, voteScore, body, author, timestamp, category, id } = this.state;
 
     return(
       <div className="post-wrapper row justify-content-center">
@@ -65,7 +67,7 @@ class Post extends Component {
         </div>
         <div className="post-content col-12 col-sm-9">
           <div className="post-title">
-            <h3>{ title }</h3>
+            <Link to={`/${category}/:${id}`}><h3>{ title }</h3></Link>
           </div>
           <div className="post-body">
             <p>

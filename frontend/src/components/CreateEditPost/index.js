@@ -25,7 +25,7 @@ class CreateEditPost extends Component {
 
         <div className="col-12 text-center">
           <button onClick={this.openModal} type="button" className="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-            + Add a post
+            CREATE POST
           </button>
         </div>
         <Modal
@@ -48,11 +48,11 @@ class CreateEditPost extends Component {
                 <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Full Name" />
               </div>
               <div className="form-group">
-                <select className="form-control" id="exampleFormControlSelect1">
-                  <option disabled selected>Choose Category</option>
-                  <option>Udacity</option>
-                  <option>Redux</option>
-                  <option>React</option>
+                <select defaultValue="none" className="form-control" id="exampleFormControlSelect1">
+                  <option value="none" disabled={true}>Choose Category</option>
+                  <option value="Udacity">Udacity</option>
+                  <option value="Redux">Redux</option>
+                  <option value="React">React</option>
                 </select>
               </div>
               <div className="form-group">
@@ -60,7 +60,7 @@ class CreateEditPost extends Component {
               </div>
             </form>
             <div className="col-12 text-center">
-              <button className="btn btn-success">Create new post</button>
+              <button className="btn btn-success">Save</button>
             </div>
           </div>
         </Modal>
