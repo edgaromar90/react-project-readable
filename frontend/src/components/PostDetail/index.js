@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { FaThumbsUp, FaThumbsOUp, FaThumbsODown, FaThumbsDown } from 'react-icons/lib/fa';
 import './PostDetail.css';
+import { connect } from 'react-redux';
+
+import { upVotePost, downVotePost, upVoteComment, downVoteComment } from '../../actions';
 
 class PostDetail extends Component {
 
   state = {
-    id: 123,
-    timestamp: '09/21/2017',
-    title: 'Post Title',
-    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat in turpis non rhoncus. Duis ut varius massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque vestibulum euismod lectus sed convallis. Aliquam at felis tincidunt, faucibus nunc sed, hendrerit massa. Cras sodales, quam ut auctor ultrices, mi lorem euismod purus, sit amet scelerisque diam nisi eget orci. Proin feugiat tempor aliquam. Duis suscipit efficitur risus et finibus. Praesent imperdiet leo ligula, vitae malesuada lectus ornare ut. Aliquam orci urna, consectetur eu leo sit amet, porta tincidunt odio.',
-    author: 'Author',
-    category: 'category',
-    voteScore: 1,
-    deleted: false,
     activeThumbsUp: false,
     activeThumbsDown: false
   }
 
-  setActiveThumbsUp = () => {
+  setActiveThumbsUp = (id) => {
+    if(!this.state.activeThumbsUp){
+      this.props.addVotePost(id);
+    }
     this.setState(prevState => ({
       activeThumbsUp: !prevState.activeThumbsUp,
       activeThumbsDown: false
@@ -32,9 +30,10 @@ class PostDetail extends Component {
     }));
   }
 
-  thumbsUp = () => {
+  thumbsUp = (id) => {
+    console.log(id);
     return (
-      <div onClick={this.setActiveThumbsUp}>
+      <div onClick={() => this.setActiveThumbsUp(id)}>
         { this.state.activeThumbsUp
           ? (<FaThumbsUp color={'#018010'} size={'2em'} />)
           : (<FaThumbsOUp color={'#018010'} size={'2em'} />)
@@ -56,18 +55,20 @@ class PostDetail extends Component {
 
   render(){
 
-    const { title, voteScore, body, author, timestamp, category, id } = this.state;
+    const post = this.props.posts.filter(post => post.id === this.props.match.params.post_id)
+    const { title, voteScore, body, author, timestamp, category, id } = post[0];
 
     return(
       <div className="post-wrapper row justify-content-center">
+        {console.log("POST DETAIL VIEW")}
         <div className="d-none d-sm-block post-vote col-12 col-sm-2 col-lg-1">
-          { this.thumbsUp() }
+          { this.thumbsUp(id) }
           <p>{voteScore}</p>
           { this.thumbsDown() }
         </div>
         <div className="post-content col-12 col-sm-9">
           <div className="post-title">
-            <Link to={`/${category}/:${id}`}><h3>{ title }</h3></Link>
+            <Link to={`/${category}/${id}`}><h3>{ title }</h3></Link>
           </div>
           <div className="post-body">
             <p>
@@ -81,7 +82,7 @@ class PostDetail extends Component {
           </div>
         </div>
         <div className="d-flex d-sm-none post-vote col-12 col-sm-2 col-lg-1">
-          { this.thumbsUp() }
+          { this.thumbsUp(id) }
           <p style={ {margin:'0 15px'} }>{voteScore}</p>
           { this.thumbsDown() }
         </div>
@@ -90,4 +91,21 @@ class PostDetail extends Component {
   }
 }
 
-export default PostDetail;
+function mapStateToProps ( {posts, comments} ) {
+  return {
+    posts: posts.allIds.map(id => posts[id])
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    addVotePost: (data) => dispatch(upVotePost(data))
+  }
+}
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(PostDetail)
+);

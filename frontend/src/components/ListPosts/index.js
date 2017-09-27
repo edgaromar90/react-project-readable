@@ -7,16 +7,11 @@ class ListPosts extends Component {
   render(){
 
     return(
-      <div className="post-list row justify-content-center">
-        <Post />
-        <hr className="col-10" />
-        <Post />
-        <hr className="col-10" />
-        <Post />
-        <hr className="col-10" />
-        <Post />
-        <hr className="col-10" />
-        <Post />
+      <div className="post-list">
+        {this.props.posts.map(post => (
+            <Post key={post.id} post={post}/>
+
+          ))}
       </div>
     );
   }

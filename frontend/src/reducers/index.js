@@ -5,8 +5,10 @@ import {
   DOWN_VOTE_COMMENT
 } from '../actions';
 
+/* Static State for now */
 const initialState = {
   posts: {
+    filterBy: null,
     allIds: ["8xf0y6ziyjabvozdd253nd", "6ni6ok3ym7mf1p33lnez"],
     "8xf0y6ziyjabvozdd253nd": {
       id: "8xf0y6ziyjabvozdd253nd",
@@ -29,7 +31,32 @@ const initialState = {
       deleted: false
     }
   },
-  comments: {},
+  comments: {
+    allIds: [
+      { parentId: "8xf0y6ziyjabvozdd253nd", commentId: "894tuq4ut84ut8v4t8wun89g" },
+      { parentId: "8xf0y6ziyjabvozdd253nd", commentId: "8tu4bsun805n8un48ve89" }
+    ],
+    "894tuq4ut84ut8v4t8wun89g": {
+      "id": "894tuq4ut84ut8v4t8wun89g",
+      "parentId": "8xf0y6ziyjabvozdd253nd",
+      "timestamp": 1468166872634,
+      "body": "Hi there! I am a COMMENT.",
+      "author": "thingtwo",
+      "voteScore": 6,
+      "deleted": false,
+      "parentDeleted": false
+    },
+    "8tu4bsun805n8un48ve89": {
+      "id": "8tu4bsun805n8un48ve89",
+      "parentId": "8xf0y6ziyjabvozdd253nd",
+      "timestamp": 1469479767190,
+      "body": "Comments. Are. Cool.",
+      "author": "thingone",
+      "voteScore": -5,
+      "deleted": false,
+      "parentDeleted": false
+    }
+  },
   categories: {
     allCategories: ["react", "redux", "udacity"],
     "react": {

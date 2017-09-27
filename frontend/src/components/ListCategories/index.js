@@ -5,7 +5,7 @@ import './ListCategories.css';
 class ListCategories extends Component {
 
   render() {
-
+    console.log(this.props);
     return (
       <div className="list-categories row justify-content-center">
         <div className="col-12 col-lg-10 text-right">
@@ -16,7 +16,7 @@ class ListCategories extends Component {
         </div>
         <div className="col-12 col-lg-8 categories-group">
           {this.props.categories.map( cat =>
-            <button type="button" key={cat} className="btn btn-primary col-3 col-lg-2" style={ {margin:'0 5px'} }>{cat}</button>
+            <button type="button" key={cat.name} className="btn btn-primary col-3 col-lg-2" style={ {margin:'0 5px'} }>{cat.name}</button>
           )}
         </div>
         <div className="col-12 col-lg-10 text-right sort-menu">

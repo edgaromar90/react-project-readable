@@ -6,14 +6,6 @@ import './Post.css';
 class Post extends Component {
 
   state = {
-    id: 123,
-    timestamp: '09/21/2017',
-    title: 'Post Title',
-    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat in turpis non rhoncus. Duis ut varius massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque vestibulum euismod lectus sed convallis. Aliquam at felis tincidunt, faucibus nunc sed, hendrerit massa. Cras sodales, quam ut auctor ultrices, mi lorem euismod purus, sit amet scelerisque diam nisi eget orci. Proin feugiat tempor aliquam. Duis suscipit efficitur risus et finibus. Praesent imperdiet leo ligula, vitae malesuada lectus ornare ut. Aliquam orci urna, consectetur eu leo sit amet, porta tincidunt odio.',
-    author: 'Author',
-    category: 'category',
-    voteScore: 1,
-    deleted: false,
     activeThumbsUp: false,
     activeThumbsDown: false
   }
@@ -56,7 +48,7 @@ class Post extends Component {
 
   render(){
 
-    const { title, voteScore, body, author, timestamp, category, id } = this.state;
+    const { title, voteScore, body, author, timestamp, category, id } = this.props.post;
 
     return(
       <div className="post-wrapper row justify-content-center">
@@ -67,13 +59,14 @@ class Post extends Component {
         </div>
         <div className="post-content col-12 col-sm-9">
           <div className="post-title">
-            <Link to={`/${category}/:${id}`}><h3>{ title }</h3></Link>
+            <Link to={`/${category}/${id}`}><h3>{ title }</h3></Link>
           </div>
           <div className="post-body">
             <p>
-              { body.slice(0,200) }...
+              { body }
             </p>
             <span>{ category }</span>
+            <p>3 comments</p>
           </div>
           <div className="post-signature">
             <p><strong>- { author } -</strong></p>
@@ -85,6 +78,7 @@ class Post extends Component {
           <p style={ {margin:'0 15px'} }>{voteScore}</p>
           { this.thumbsDown() }
         </div>
+        <hr className="col-10" />
       </div>
     );
   }

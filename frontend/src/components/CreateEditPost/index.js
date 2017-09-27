@@ -41,7 +41,7 @@ class CreateEditPost extends Component {
               <button className="btn btn-sm btn-danger" onClick={this.closeModal}>close</button>
             </div>
             <div className="col-12 header-modal text-center">
-              <span className="h4"><strong>Create or Edit Post</strong></span>
+              <span className="h4"><strong>Create Post</strong></span>
             </div>
             <form className="col-12 col-lg-8 col-xl-6">
               <div className="form-group">

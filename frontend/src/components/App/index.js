@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ListPosts from '../ListPosts';
 import ListCategories from '../ListCategories';
@@ -10,50 +10,56 @@ import './App.css';
 import { upVotePost, downVotePost, upVoteComment, downVoteComment } from '../../actions';
 
 class App extends Component {
-  state={
-    filter: 'byVote',
-    categories: [
-      'Udacity',
-      'React',
-      'Redux'
-    ]
-  }
 
   render() {
 
-    const logoStyle = { margin:'0 5px 0 10px' }
+    const logoStyle = { margin:'0 5px 0 10px' };
+    const { categories, posts } = this.props;
 
     return (
       <div className="app container-fluid">
+        {/* Header */}
         <div className="header-app row">
-          { this.props.posts[0].voteScore }
-          <FaNewspaperO color={'#fff'} size={'2em'} style={logoStyle} onClick={() => this.props.addVotePost("8xf0y6ziyjabvozdd253nd")}/>
+          <FaNewspaperO color={'#fff'} size={'2em'} style={logoStyle} />
           <h3>Readable</h3>
         </div>
-        <Route exact path="/" render={() => <Redirect to="/all" />}/>
+        {/* - End of Header - */}
+
+        <Route exact path="/" render={({history}) => <Redirect to="/all" /> }/>
+
+        {/* - Root View - */}
         <Route exact path="/:category" render={(props) => (
           <div className="root-view">
-          {props.match.params.category}
-            <div className="container">
+            {console.log("ROOT VIEW")}
+            {props.match.params.category}
+            <div className="container-fluid">
               <CreateEditPost />
             </div>
-            <div className="container">
-              <ListCategories categories={this.state.categories} />
+            <div className="container-fluid">
+              <ListCategories categories={categories} />
             </div>
-            <div className="container">
-              <ListPosts />
+            <div className="container-fluid">
+              <ListPosts posts={posts} />
             </div>
           </div>
         )} />
-        <Route path="/:category/:post_id" component={PostDetail}/>
+        {/* - End of Root View - */}
+
+        { categories.map(category =>
+          <Route exact path={`/${category.path}/:post_id`} component={PostDetail}/>
+        ) }
+
       </div>
     );
   }
 }
 
 function mapStateToProps ({ posts, comments, categories}) {
+  const { filterBy } = posts;
+  console.log(filterBy);
+  const showPosts = posts.allIds.map(id => posts[id]);
   return {
-    posts: posts.allIds.map(id => posts[id]),
+    posts: filterBy ? showPosts.filter(post => post.category === filterBy) : showPosts,
     categories: categories.allCategories.map(cat => categories[cat])
   }
 }
@@ -64,7 +70,9 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-  )(App);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App)
+);
