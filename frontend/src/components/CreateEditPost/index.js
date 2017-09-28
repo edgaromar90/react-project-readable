@@ -4,41 +4,23 @@ import './CreateEditPost.css';
 
 class CreateEditPost extends Component {
 
-  state = {
-    modalOpen: false
-  }
-
-  openModal = () => {
-    this.setState({modalOpen:true})
-  }
-
-  closeModal = () => {
-    this.setState({modalOpen:false})
-  }
-
   render() {
 
-    const { modalOpen } = this.state;
+    const { closeModal, isModalOpened } = this.props;
 
     return (
       <div className="post-form row justify-content-center create-post">
-
-        <div className="col-12 text-center">
-          <button onClick={this.openModal} type="button" className="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-            CREATE POST
-          </button>
-        </div>
         <Modal
-          isOpen={modalOpen}
+          isOpen={isModalOpened}
           overlayClassName='overlay'
-          onRequestClose={this.closeModal}
-          closeTimeoutMS={200}
+          onRequestClose={closeModal}
+          closeTimeoutMS={50}
           contentLabel='Modal'
           className='custom-modal'
           >
           <div className="row justify-content-center">
             <div className="col-12 text-right">
-              <button className="btn btn-sm btn-danger" onClick={this.closeModal}>close</button>
+              <button className="btn btn-sm btn-danger" onClick={closeModal}>close</button>
             </div>
             <div className="col-12 header-modal text-center">
               <span className="h4"><strong>Create Post</strong></span>

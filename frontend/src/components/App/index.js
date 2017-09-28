@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ListPosts from '../ListPosts';
 import ListCategories from '../ListCategories';
@@ -7,14 +7,14 @@ import CreateEditPost from '../CreateEditPost';
 import PostDetail from '../PostDetail';
 import { FaNewspaperO } from 'react-icons/lib/fa';
 import './App.css';
-import { upVotePost, downVotePost, upVoteComment, downVoteComment } from '../../actions';
+import { openPostModal, closePostModal } from '../../actions';
 
 class App extends Component {
 
   render() {
 
     const logoStyle = { margin:'0 5px 0 10px' };
-    const { categories, posts } = this.props;
+    const { categories, posts, openModal, closeModal, isModalOpened } = this.props;
 
     return (
       <div className="app container-fluid">
@@ -30,10 +30,13 @@ class App extends Component {
         {/* - Root View - */}
         <Route exact path="/:category" render={(props) => (
           <div className="root-view">
-            {console.log("ROOT VIEW")}
-            {props.match.params.category}
             <div className="container-fluid">
-              <CreateEditPost />
+              <div className="col-12 text-center">
+                <button onClick={() => openModal() } type="button" className="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                  CREATE POST
+                </button>
+              </div>
+              <CreateEditPost isModalOpened={isModalOpened} closeModal={() => closeModal() }/>
             </div>
             <div className="container-fluid">
               <ListCategories categories={categories} />
@@ -46,7 +49,7 @@ class App extends Component {
         {/* - End of Root View - */}
 
         { categories.map(category =>
-          <Route exact path={`/${category.path}/:post_id`} component={PostDetail}/>
+          <Route key={category.path} exact path={`/${category.path}/:post_id`} component={PostDetail}/>
         ) }
 
       </div>
@@ -54,19 +57,21 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ posts, comments, categories}) {
+function mapStateToProps ({ posts, comments, categories, modalPost }) {
   const { filterBy } = posts;
-  console.log(filterBy);
   const showPosts = posts.allIds.map(id => posts[id]);
   return {
     posts: filterBy ? showPosts.filter(post => post.category === filterBy) : showPosts,
-    categories: categories.allCategories.map(cat => categories[cat])
+    categories: categories.allCategories.map(cat => categories[cat]),
+    isModalOpened: modalPost
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    addVotePost: (data) => dispatch(upVotePost(data))
+    //addVotePost: (data) => dispatch(upVotePost(data))
+    openModal: () => dispatch(openPostModal()),
+    closeModal: () => dispatch(closePostModal())
   }
 }
 

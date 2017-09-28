@@ -2,11 +2,14 @@ import {
   UP_VOTE_POST,
   DOWN_VOTE_POST,
   UP_VOTE_COMMENT,
-  DOWN_VOTE_COMMENT
+  DOWN_VOTE_COMMENT,
+  OPEN_POST_MODAL,
+  CLOSE_POST_MODAL
 } from '../actions';
 
 /* Static State for now */
 const initialState = {
+  modalPost: false,
   posts: {
     filterBy: null,
     allIds: ["8xf0y6ziyjabvozdd253nd", "6ni6ok3ym7mf1p33lnez"],
@@ -83,19 +86,46 @@ function score (state=initialState, action) {
           posts:{
             ...state.posts,
             [action.post_id]: {
+              ...state.posts[action.post_id],
               voteScore: state.posts[action.post_id].voteScore + 1
             }
           }
       }
     case DOWN_VOTE_POST :
-      break;
+      return {
+        ...state,
+          posts:{
+            ...state.posts,
+            [action.post_id]: {
+              ...state.posts[action.post_id],
+              voteScore: state.posts[action.post_id].voteScore - 1
+            }
+          }
+      }
     case UP_VOTE_COMMENT :
       break;
     case DOWN_VOTE_COMMENT :
       break
+    case OPEN_POST_MODAL:
+      return {
+        ...state,
+          modalPost: true
+      }
+    case CLOSE_POST_MODAL:
+      return {
+        ...state,
+          modalPost: false
+      }
     default :
       return state;
   }
 }
+
+/*function modal (state=initialState, action) {
+  switch (action.type){
+    default:
+      return state;
+  }
+}*/
 
 export default score;

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { FaCaretDown, FaFilter } from 'react-icons/lib/fa';
+import { FaFilter } from 'react-icons/lib/fa';
 import './ListCategories.css';
 
 class ListCategories extends Component {
 
   render() {
-    console.log(this.props);
     return (
       <div className="list-categories row justify-content-center">
         <div className="col-12 col-lg-10 text-right">
