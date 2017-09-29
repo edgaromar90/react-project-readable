@@ -6,7 +6,11 @@ class CreateEditPost extends Component {
 
   render() {
 
-    const { closeModal, isModalOpened } = this.props;
+    // PASS ACTIONS CREATORS AS PROPS
+    // -> Create Post
+    // -> Edit Post
+
+    const { closeModal, isModalOpened, modalTitle } = this.props;
 
     return (
       <div className="post-form row justify-content-center create-post">
@@ -23,7 +27,7 @@ class CreateEditPost extends Component {
               <button className="btn btn-sm btn-danger" onClick={closeModal}>close</button>
             </div>
             <div className="col-12 header-modal text-center">
-              <span className="h4"><strong>Create Post</strong></span>
+              <span className="h4"><strong>{ modalTitle }</strong></span>
             </div>
             <form className="col-12 col-lg-8 col-xl-6">
               <div className="form-group">

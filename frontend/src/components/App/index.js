@@ -31,12 +31,12 @@ class App extends Component {
         <Route exact path="/:category" render={(props) => (
           <div className="root-view">
             <div className="container-fluid">
-              <div className="col-12 text-center">
+              <div className="col-12 text-center create-post">
                 <button onClick={() => openModal() } type="button" className="btn btn-success" data-toggle="modal" data-target="#exampleModal">
                   CREATE POST
                 </button>
               </div>
-              <CreateEditPost isModalOpened={isModalOpened} closeModal={() => closeModal() }/>
+              <CreateEditPost modalTitle={'Create Post'} isModalOpened={isModalOpened} closeModal={() => closeModal() }/>
             </div>
             <div className="container-fluid">
               <ListCategories categories={categories} />

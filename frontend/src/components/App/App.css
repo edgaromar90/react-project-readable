@@ -12,3 +12,11 @@
 .header-app h3 {
   margin-top: 0;
 }
+
+.create-post {
+  padding-top: 30px;
+}
+
+.create-post button {
+  font-weight: bold;
+}
