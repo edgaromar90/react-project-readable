@@ -7,14 +7,14 @@ import CreateEditPost from '../CreateEditPost';
 import PostDetail from '../PostDetail';
 import { FaNewspaperO } from 'react-icons/lib/fa';
 import './App.css';
-import { openPostModal, closePostModal } from '../../actions';
+import { openPostModal, closePostModal, upVotePost, downVotePost } from '../../actions';
 
 class App extends Component {
 
   render() {
 
     const logoStyle = { margin:'0 5px 0 10px' };
-    const { categories, posts, openModal, closeModal, isModalOpened } = this.props;
+    const { categories, posts, openModal, closeModal, isModalOpened, addVotePost, removeVotePost } = this.props;
 
     return (
       <div className="app container-fluid">
@@ -42,12 +42,13 @@ class App extends Component {
               <ListCategories categories={categories} />
             </div>
             <div className="container-fluid">
-              <ListPosts posts={posts} />
+              <ListPosts posts={posts} addVotePost={addVotePost} removeVotePost={removeVotePost} />
             </div>
           </div>
         )} />
         {/* - End of Root View - */}
 
+        {/* - Dinamically create a route for each category in the Store - */}
         { categories.map(category =>
           <Route key={category.path} exact path={`/${category.path}/:post_id`} component={PostDetail}/>
         ) }
@@ -69,7 +70,8 @@ function mapStateToProps ({ posts, comments, categories, modalPost }) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    //addVotePost: (data) => dispatch(upVotePost(data))
+    addVotePost: (data) => dispatch(upVotePost(data)),
+    removeVotePost: (data) => dispatch(downVotePost(data)),
     openModal: () => dispatch(openPostModal()),
     closeModal: () => dispatch(closePostModal())
   }

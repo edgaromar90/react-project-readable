@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FaThumbsUp, FaThumbsOUp, FaThumbsODown, FaThumbsDown, FaEdit, FaTrashO } from 'react-icons/lib/fa';
+import { FaThumbsUp, FaThumbsOUp, FaThumbsODown, FaThumbsDown } from 'react-icons/lib/fa';
 
 class VoteControllers extends Component {
 
@@ -56,7 +56,7 @@ class VoteControllers extends Component {
 
   render() {
 
-    const { orientation, id, voteScore, addVotePost, removeVotePost } = this.props;
+    const { orientation, id, voteScore } = this.props;
     const scoreStyle = { margin:'0 15px' };
     const PORTRAIT = 'PORTRAIT';
 

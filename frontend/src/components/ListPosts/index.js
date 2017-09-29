@@ -6,10 +6,16 @@ class ListPosts extends Component {
 
   render(){
 
+    const { posts, addVotePost, removeVotePost } = this.props;
+
     return(
       <div className="post-list">
-        {this.props.posts.map(post => (
-            <Post key={post.id} post={post}/>
+        {posts.map(post => (
+            <Post
+              key={post.id}
+              post={post}
+              addVotePost={addVotePost}
+              removeVotePost={removeVotePost} />
 
           ))}
       </div>
