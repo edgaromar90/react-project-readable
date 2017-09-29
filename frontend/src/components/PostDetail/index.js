@@ -4,6 +4,8 @@ import { FaThumbsUp, FaThumbsOUp, FaThumbsODown, FaThumbsDown, FaEdit, FaTrashO 
 import './PostDetail.css';
 import { connect } from 'react-redux';
 
+import VoteControllers from '../VoteControllers';
+
 import { upVotePost, downVotePost } from '../../actions';
 
 class PostDetail extends Component {
@@ -66,11 +68,13 @@ class PostDetail extends Component {
 
     return(
       <div className="post-wrapper row justify-content-center">
-        <div className="d-none d-sm-block post-vote col-12 col-sm-2 col-lg-1">
-          { this.thumbsUp(id) }
-          <p>{voteScore}</p>
-          { this.thumbsDown(id) }
-        </div>
+        <VoteControllers
+          orientation="PORTRAIT"
+          id={id}
+          voteScore={voteScore}
+          addVotePost={this.props.addVotePost}
+          removeVotePost={this.props.removeVotePost}
+        />
         <div className="post-content col-12 col-sm-9">
           <div className="post-title">
             <div className="text-right">
@@ -90,11 +94,13 @@ class PostDetail extends Component {
             { timestamp }
           </div>
         </div>
-        <div className="d-flex d-sm-none post-vote col-12 col-sm-2 col-lg-1">
-          { this.thumbsUp(id) }
-          <p style={ {margin:'0 15px'} }>{voteScore}</p>
-          { this.thumbsDown(id) }
-        </div>
+        <VoteControllers
+          orientation="LANDSCAPE"
+          id={id}
+          voteScore={voteScore}
+          addVotePost={this.props.addVotePost}
+          removeVotePost={this.props.removeVotePost}
+        />
       </div>
     );
   }
