@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { FaEdit, FaTrashO } from 'react-icons/lib/fa';
 import './PostDetail.css';
 import { connect } from 'react-redux';
@@ -7,8 +7,22 @@ import { connect } from 'react-redux';
 import VoteControllers from '../VoteControllers';
 import CreateEditPost from '../CreateEditPost';
 import { upVotePost, downVotePost, openPostModal, closePostModal } from '../../actions';
+import { FaEllipsisV } from 'react-icons/lib/fa';
+
 
 class PostDetail extends Component {
+
+  state = {
+    displayOptions: false
+  }
+
+  toggleOptions = () => {
+    this.setState(prevState => ({displayOptions: !prevState.displayOptions}));
+  }
+
+  closeOptions = () => {
+    this.setState({displayOptions: false});
+  }
 
   render(){
 
@@ -25,19 +39,26 @@ class PostDetail extends Component {
           addVotePost={addVotePost}
           removeVotePost={removeVotePost}
         />
-        <div className="post-content col-12 col-sm-9">
-          <div className="post-title">
-            <div className="text-right">
-              <FaEdit className="align-baseline" color={'#007bff'} size={'2.3em'} onClick={() => openModal()} />
-              <FaTrashO className="align-top" color={'#A80110'} style={ {margin:'0 10px'} } size={'2.1em'} />
+        <div className="align-baseline post-content col-12 col-sm-9">
+          <div className="row justify-content-between">
+            <div className="col-10 col-lg-11 post-title">
+              <h3>{ title }</h3>
             </div>
-            <h3>{ title }</h3>
-            <CreateEditPost modalTitle={'Edit Post'} isModalOpened={isModalOpened} closeModal={() => closeModal() }/>
+            <div className="v-ellipsis-wrapper col-2 col-lg-1">
+              <FaEllipsisV className="ellipsis-icon" color={'#ccc'} size={'3em'} onClick={this.toggleOptions} />
+              { this.state.displayOptions &&
+                (<div className="text-left options-wrapper">
+                  <FaEdit className="edit-icon" color={'#007bff'} size={'2.1em'} onClick={() => {
+                    this.toggleOptions()
+                    openModal()
+                  }} />
+                  <FaTrashO className="trash-o-icon" color={'#A80110'} size={'2.2em'} />
+                </div>)}
+            </div>
           </div>
+          <CreateEditPost modalTitle={'Edit Post'} isModalOpened={isModalOpened} closeModal={() => closeModal() }/>
           <div className="post-body">
-            <p>
-              { body }
-            </p>
+            <p>{ body } </p>
             <span>{ category }</span>
           </div>
           <div className="post-signature">

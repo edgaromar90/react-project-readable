@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FaThumbsUp, FaThumbsOUp, FaThumbsODown, FaThumbsDown } from 'react-icons/lib/fa';
+import './VoteControllers.css';
 
 class VoteControllers extends Component {
 

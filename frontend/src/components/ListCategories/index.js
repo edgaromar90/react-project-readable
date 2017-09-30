@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FaFilter } from 'react-icons/lib/fa';
+import { FaThList } from 'react-icons/lib/fa';
 import './ListCategories.css';
 
 class ListCategories extends Component {
@@ -11,7 +11,7 @@ class ListCategories extends Component {
           <small>[ show all ]</small>
         </div>
         <div className="col-12 col-lg-8">
-          <FaFilter size={'1.5em'} /><span style={ {fontSize:'1.5em'} } className="align-middle"> Categories:</span>
+          <FaThList size={'1.5em'} /><span style={ {fontSize:'1.5em'} } className="align-middle"> Categories:</span>
         </div>
         <div className="col-12 col-lg-8 categories-group">
           {this.props.categories.map( cat =>

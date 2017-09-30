@@ -1,0 +1,10 @@
+.post-vote {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.post-vote p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 1.4em;
+}
