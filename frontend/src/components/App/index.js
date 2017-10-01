@@ -25,9 +25,8 @@ class App extends Component {
         </div>
         {/* - End of Header - */}
 
-        <Route exact path="/" render={({history}) => <Redirect to="/all" /> }/>
-
         {/* - Root View - */}
+        <Route exact path="/" render={({history}) => <Redirect to="/all" /> }/>
         <Route exact path="/:category" render={(props) => (
           <div className="root-view">
               <div className="create-post">
@@ -38,7 +37,7 @@ class App extends Component {
                 modalTitle={'Create Post'}
                 modalToOpen={modalToOpen}
                 modalId={'create_post'}
-                closeModal={() => closeModal() }/>
+                closeModal={closeModal}/>
             </div>
             <div className="container-fluid">
               <ListCategories categories={categories} />
@@ -47,8 +46,7 @@ class App extends Component {
               <ListPosts
                 posts={posts}
                 addVotePost={addVotePost}
-                removeVotePost={removeVotePost}
-                modalToOpen={modalToOpen} openModal={openModal} closeModal={closeModal} />
+                removeVotePost={removeVotePost} />
             </div>
           </div>
         )} />
@@ -58,7 +56,6 @@ class App extends Component {
         { categories.map(category =>
           <Route key={category.path} exact path={`/${category.path}/:post_id`} component={PostDetail}/>
         ) }
-
       </div>
     );
   }

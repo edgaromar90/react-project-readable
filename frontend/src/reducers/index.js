@@ -9,7 +9,6 @@ import {
 
 /* Static State for now */
 const initialState = {
-  modalPost: false,
   modalToOpen: null,
   posts: {
     filterBy: null,
@@ -109,13 +108,11 @@ function score (state=initialState, action) {
     case OPEN_POST_MODAL:
       return {
         ...state,
-          modalPost: true,
           modalToOpen: action.modalId
       }
     case CLOSE_POST_MODAL:
       return {
         ...state,
-          modalPost: false,
           modalToOpen: null
       }
     default :

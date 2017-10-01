@@ -6,12 +6,9 @@ class CreateEditPost extends Component {
 
   render() {
 
-    // PASS ACTIONS CREATORS AS PROPS
-    // -> Create Post
-    // -> Edit Post
-
-    const { closeModal, modalToOpen, modalTitle, post, modalId } = this.props;
+    const { closeModal, modalToOpen, modalTitle, modalId, post } = this.props;
     let title, author, body, category;
+
     if(post){
       ({title, author, body, category} = post);
     }

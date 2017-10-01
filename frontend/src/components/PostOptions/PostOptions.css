@@ -1,0 +1,21 @@
+.options-wrapper {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+.ellipsis-icon {
+  border-left: 1px solid;
+  border-right: 1px solid;
+}
+
+.edit-icon {
+  margin-top: 15px;
+  width: 100%;
+}
+
+.trash-o-icon {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 100%;
+}

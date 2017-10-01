@@ -14,7 +14,7 @@ class Post extends Component {
 
   render(){
 
-    const { post, addVotePost, removeVotePost, modalToOpen, openModal, closeModal } = this.props;
+    const { post, addVotePost, removeVotePost } = this.props;
     const { title, voteScore, body, author, timestamp, category, id } = post;
 
     return(
@@ -27,19 +27,14 @@ class Post extends Component {
           removeVotePost={removeVotePost}
         />
         <div className="post-content col-12 col-sm-9">
-          <div className="post-title">
-            <Link to={`/${category}/${id}`}><h3>{ title }</h3></Link>
-            <PostOptions
-              post={post}
-              modalId={id}
-              modalToOpen={modalToOpen}
-              openModal={openModal}
-              closeModal={closeModal} />
+          <div className="row">
+            <div className="post-title col-10 col-lg-11">
+              <Link to={`/${category}/${id}`}><h3>{ title }</h3></Link>
+            </div>
+            <PostOptions post={post} />
           </div>
           <div className="post-body">
-            <p>
-              { body }
-            </p>
+            <p>{ body }</p>
             <span>{ category }</span>
           {/* -- REMEMBER HERE -- */}
             <p>3 comments</p>
