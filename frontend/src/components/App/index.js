@@ -14,7 +14,7 @@ class App extends Component {
   render() {
 
     const logoStyle = { margin:'0 5px 0 10px' };
-    const { categories, posts, openModal, closeModal, isModalOpened, addVotePost, removeVotePost } = this.props;
+    const { categories, posts, openModal, closeModal, modalToOpen, addVotePost, removeVotePost } = this.props;
 
     return (
       <div className="app container-fluid">
@@ -31,16 +31,24 @@ class App extends Component {
         <Route exact path="/:category" render={(props) => (
           <div className="root-view">
               <div className="create-post">
-                <button className="btn btn-success" onClick={() => openModal() }>
+                <button className="btn btn-success" onClick={() => openModal('create_post') }>
                   <FaPlus size={'1em'} color={'#fff'} />
                 </button>
-              <CreateEditPost modalTitle={'Create Post'} isModalOpened={isModalOpened} closeModal={() => closeModal() }/>
+              <CreateEditPost
+                modalTitle={'Create Post'}
+                modalToOpen={modalToOpen}
+                modalId={'create_post'}
+                closeModal={() => closeModal() }/>
             </div>
             <div className="container-fluid">
               <ListCategories categories={categories} />
             </div>
             <div className="container-fluid">
-              <ListPosts posts={posts} addVotePost={addVotePost} removeVotePost={removeVotePost} />
+              <ListPosts
+                posts={posts}
+                addVotePost={addVotePost}
+                removeVotePost={removeVotePost}
+                modalToOpen={modalToOpen} openModal={openModal} closeModal={closeModal} />
             </div>
           </div>
         )} />
@@ -56,13 +64,14 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ posts, comments, categories, modalPost }) {
+function mapStateToProps ({ posts, comments, categories, modalPost, modalToOpen }) {
   const { filterBy } = posts;
   const showPosts = posts.allIds.map(id => posts[id]);
   return {
     posts: filterBy ? showPosts.filter(post => post.category === filterBy) : showPosts,
     categories: categories.allCategories.map(cat => categories[cat]),
-    isModalOpened: modalPost
+    isModalOpened: modalPost,
+    modalToOpen
   }
 }
 
@@ -70,8 +79,8 @@ function mapDispatchToProps (dispatch) {
   return {
     addVotePost: (data) => dispatch(upVotePost(data)),
     removeVotePost: (data) => dispatch(downVotePost(data)),
-    openModal: () => dispatch(openPostModal()),
-    closeModal: () => dispatch(closePostModal())
+    openModal: (id) => dispatch(openPostModal(id)),
+    closeModal: (id) => dispatch(closePostModal(id))
   }
 }
 

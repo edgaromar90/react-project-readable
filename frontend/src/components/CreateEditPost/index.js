@@ -10,12 +10,15 @@ class CreateEditPost extends Component {
     // -> Create Post
     // -> Edit Post
 
-    const { closeModal, isModalOpened, modalTitle } = this.props;
-
+    const { closeModal, modalToOpen, modalTitle, post, modalId } = this.props;
+    let title, author, body, category;
+    if(post){
+      ({title, author, body, category} = post);
+    }
     return (
       <div className="post-form row justify-content-center create-post">
         <Modal
-          isOpen={isModalOpened}
+          isOpen={modalToOpen === modalId}
           overlayClassName='overlay'
           onRequestClose={closeModal}
           closeTimeoutMS={50}
@@ -31,18 +34,21 @@ class CreateEditPost extends Component {
             </div>
             <form className="col-12 col-lg-8 col-xl-6">
               <div className="form-group">
-                <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Full Name" />
+                <input type="text" className="form-control" placeholder="Title" value={title}/>
               </div>
               <div className="form-group">
-                <select defaultValue="none" className="form-control" id="exampleFormControlSelect1">
+                <select defaultValue={category ? category : "none"} className="form-control" id="exampleFormControlSelect1">
                   <option value="none" disabled={true}>Choose Category</option>
-                  <option value="Udacity">Udacity</option>
-                  <option value="Redux">Redux</option>
-                  <option value="React">React</option>
+                  <option value="udacity">Udacity</option>
+                  <option value="redux">Redux</option>
+                  <option value="react">React</option>
                 </select>
               </div>
               <div className="form-group">
-                <textarea className="form-control" rows="7" placeholder="Write your post here..."></textarea>
+                <input type="text" className="form-control" placeholder="Author" value={author}/>
+              </div>
+              <div className="form-group">
+                <textarea className="form-control" rows="7" placeholder="Write your post here..." value={body ? body : ''}></textarea>
               </div>
             </form>
             <div className="col-12 text-center">

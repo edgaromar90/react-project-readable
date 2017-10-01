@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import './Post.css';
 import VoteControllers from '../VoteControllers';
 
+import PostOptions from '../PostOptions';
+
 class Post extends Component {
 
   /**
@@ -12,8 +14,8 @@ class Post extends Component {
 
   render(){
 
-    const { title, voteScore, body, author, timestamp, category, id } = this.props.post;
-    const { addVotePost, removeVotePost } = this.props;
+    const { post, addVotePost, removeVotePost, modalToOpen, openModal, closeModal } = this.props;
+    const { title, voteScore, body, author, timestamp, category, id } = post;
 
     return(
       <div className="post-wrapper row justify-content-center">
@@ -27,6 +29,12 @@ class Post extends Component {
         <div className="post-content col-12 col-sm-9">
           <div className="post-title">
             <Link to={`/${category}/${id}`}><h3>{ title }</h3></Link>
+            <PostOptions
+              post={post}
+              modalId={id}
+              modalToOpen={modalToOpen}
+              openModal={openModal}
+              closeModal={closeModal} />
           </div>
           <div className="post-body">
             <p>

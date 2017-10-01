@@ -40,9 +40,10 @@ export function downVoteComment(post_id){
 }
 
 /* MODAL FORM */
-export function openPostModal(){
+export function openPostModal(modalId){
   return {
-    type: OPEN_POST_MODAL
+    type: OPEN_POST_MODAL,
+    modalId
   }
 }
 

@@ -5,8 +5,7 @@ import './ListPosts.css';
 class ListPosts extends Component {
 
   render(){
-
-    const { posts, addVotePost, removeVotePost } = this.props;
+    const { posts, addVotePost, removeVotePost, modalToOpen, openModal, closeModal } = this.props;
 
     return(
       <div className="post-list">
@@ -15,8 +14,8 @@ class ListPosts extends Component {
               key={post.id}
               post={post}
               addVotePost={addVotePost}
-              removeVotePost={removeVotePost} />
-
+              removeVotePost={removeVotePost}
+              modalToOpen={modalToOpen} openModal={openModal} closeModal={closeModal} />
           ))}
       </div>
     );

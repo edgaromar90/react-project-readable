@@ -10,6 +10,7 @@ import {
 /* Static State for now */
 const initialState = {
   modalPost: false,
+  modalToOpen: null,
   posts: {
     filterBy: null,
     allIds: ["8xf0y6ziyjabvozdd253nd", "6ni6ok3ym7mf1p33lnez"],
@@ -78,7 +79,6 @@ const initialState = {
 }
 
 function score (state=initialState, action) {
-  console.log(action);
   switch (action.type){
     case UP_VOTE_POST :
       return {
@@ -109,23 +109,18 @@ function score (state=initialState, action) {
     case OPEN_POST_MODAL:
       return {
         ...state,
-          modalPost: true
+          modalPost: true,
+          modalToOpen: action.modalId
       }
     case CLOSE_POST_MODAL:
       return {
         ...state,
-          modalPost: false
+          modalPost: false,
+          modalToOpen: null
       }
     default :
       return state;
   }
 }
-
-/*function modal (state=initialState, action) {
-  switch (action.type){
-    default:
-      return state;
-  }
-}*/
 
 export default score;
