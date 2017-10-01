@@ -14,9 +14,15 @@
 }
 
 .create-post {
-  padding-top: 30px;
+  position: fixed;
+  right: 5%;
+  bottom: 100px;
+  z-index: 1;
 }
 
 .create-post button {
+  border: 1px solid darkgreen;
+  box-shadow: 1px 1px 10px #000;
+  border-radius: 50% 50%;
   font-weight: bold;
 }

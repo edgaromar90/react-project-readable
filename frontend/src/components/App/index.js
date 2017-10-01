@@ -5,7 +5,7 @@ import ListPosts from '../ListPosts';
 import ListCategories from '../ListCategories';
 import CreateEditPost from '../CreateEditPost';
 import PostDetail from '../PostDetail';
-import { FaNewspaperO } from 'react-icons/lib/fa';
+import { FaNewspaperO, FaPlus } from 'react-icons/lib/fa';
 import './App.css';
 import { openPostModal, closePostModal, upVotePost, downVotePost } from '../../actions';
 
@@ -30,12 +30,10 @@ class App extends Component {
         {/* - Root View - */}
         <Route exact path="/:category" render={(props) => (
           <div className="root-view">
-            <div className="container-fluid">
-              <div className="col-12 text-center create-post">
-                <button onClick={() => openModal() } type="button" className="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-                  CREATE POST
+              <div className="create-post">
+                <button className="btn btn-success" onClick={() => openModal() }>
+                  <FaPlus size={'1em'} color={'#fff'} />
                 </button>
-              </div>
               <CreateEditPost modalTitle={'Create Post'} isModalOpened={isModalOpened} closeModal={() => closeModal() }/>
             </div>
             <div className="container-fluid">
